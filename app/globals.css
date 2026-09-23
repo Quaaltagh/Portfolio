@@ -1,26 +1,49 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --color-background: #060a14;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* Sembunyikan kursor standar hanya di perangkat yang mendukung mouse */
+@media (pointer: fine) {
+  * {
+    cursor: none !important;
   }
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-background);
+  color: #e2e8f0; /* slate-200 */
+  overflow-x: hidden;
+}
+
+/* Efek Glassmorphism Dasar */
+@utility glass {
+  background-color: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* Efek Hover untuk Glassmorphism */
+@utility glass-hover {
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.25);
+    transition: all 0.3s ease;
+  }
+}
+
+/* Grid Lantai Sci-Fi */
+@utility bg-grid {
+  background-size: 40px 40px;
+  background-image: linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+                    linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+}
+
+/* Animasi untuk efek Meteor */
+@keyframes meteor {
+  0% { transform: rotate(var(--angle)) translateX(0); opacity: 1; }
+  70% { opacity: 1; }
+  100% { transform: rotate(var(--angle)) translateX(-500px); opacity: 0; }
 }
