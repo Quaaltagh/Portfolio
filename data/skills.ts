@@ -26,4 +26,5 @@ export const cloudTechnologies: string[] = [
   "Git",
   "Unity",
   "C#",
+  ".NET",
 ];

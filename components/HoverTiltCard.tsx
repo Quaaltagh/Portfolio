@@ -4,7 +4,15 @@ import React, { useRef } from "react";
 import { motion, useMotionValue, useSpring } from "framer-motion";
 import { cn } from "@/lib/utils";
 
-export default function HoverTiltCard({ children, className }: { children: React.ReactNode; className?: string }) {
+export default function HoverTiltCard({
+  children,
+  className,
+  noPadding = false,
+}: {
+  children: React.ReactNode;
+  className?: string;
+  noPadding?: boolean;
+}) {
   const ref = useRef<HTMLDivElement>(null);
   const rotateX = useMotionValue(0);
   const rotateY = useMotionValue(0);
@@ -31,7 +39,7 @@ export default function HoverTiltCard({ children, className }: { children: React
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       style={{ rotateX: springX, rotateY: springY, transformStyle: "preserve-3d" }}
-      className={cn("glass glass-hover p-8 rounded-xl", className)}
+      className={cn("glass glass-hover rounded-xl", noPadding ? "" : "p-8", className)}
     >
       <div style={{ transform: "translateZ(40px)" }}>{children}</div>
     </motion.div>
