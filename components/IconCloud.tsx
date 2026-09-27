@@ -1,27 +1,45 @@
 "use client";
 
 import React, { useEffect, useRef } from "react";
-import { cloudTechnologies } from "@/data/skills";
+import { cloudTechnologies, type Technology } from "@/data/skills";
 
 interface SpherePoint {
   x: number;
   y: number;
   z: number;
-  text: string;
+  tech: Technology;
+  img: HTMLImageElement | null;
+  failed: boolean;
 }
 
 class FibonacciSphere {
   readonly points: SpherePoint[];
 
-  constructor(labels: string[], radius = 120) {
-    this.points = labels.map((text, i) => {
-      const phi = Math.acos(1 - (2 * i) / labels.length);
+  constructor(technologies: Technology[], radius = 120) {
+    this.points = technologies.map((tech, i) => {
+      const phi = Math.acos(1 - (2 * i) / technologies.length);
       const theta = Math.PI * (1 + Math.sqrt(5)) * i;
       return {
         x: radius * Math.cos(theta) * Math.sin(phi),
         y: radius * Math.sin(theta) * Math.sin(phi),
         z: radius * Math.cos(phi),
-        text,
+        tech,
+        img: null,
+        failed: false,
+      };
+    });
+  }
+
+  preloadImages() {
+    this.points.forEach((p) => {
+      const img = new Image();
+      img.crossOrigin = "anonymous";
+      img.src = p.tech.iconUrl;
+      img.onload = () => {
+        p.img = img;
+      };
+      img.onerror = () => {
+        p.failed = true;
       };
     });
   }
@@ -99,16 +117,38 @@ class SphereRenderer {
       const y1 = p.y * cosX - z1 * sinX;
       const z2 = p.y * sinX + z1 * cosX;
       const scale = focal / (focal + z2);
-      return { x: x1 * scale + cx, y: y1 * scale + cy, z: z2, scale, text: p.text };
+      return { x: x1 * scale + cx, y: y1 * scale + cy, scale, z: z2, tech: p.tech, img: p.img, failed: p.failed };
     });
 
     projected.sort((a, b) => b.z - a.z);
     projected.forEach((p) => {
-      ctx.font = `bold ${Math.max(12, 16 * p.scale)}px sans-serif`;
-      ctx.fillStyle = `rgba(76, 201, 240, ${Math.max(0.2, p.scale)})`;
-      ctx.textAlign = "center";
-      ctx.textBaseline = "middle";
-      ctx.fillText(p.text, p.x, p.y);
+      const size = Math.max(14, 34 * p.scale);
+      const alpha = Math.max(0.25, p.scale);
+
+      if (p.img) {
+        ctx.save();
+        ctx.globalAlpha = alpha;
+        ctx.drawImage(p.img, p.x - size / 2, p.y - size / 2, size, size);
+        ctx.restore();
+      } else if (p.failed) {
+        ctx.save();
+        ctx.globalAlpha = alpha;
+        ctx.beginPath();
+        ctx.fillStyle = `#${p.tech.color === "FFFFFF" ? "334155" : p.tech.color}`;
+        ctx.arc(p.x, p.y, size / 2, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.fillStyle = "#ffffff";
+        ctx.font = `bold ${size * 0.45}px sans-serif`;
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillText(p.tech.name.charAt(0), p.x, p.y + 1);
+        ctx.restore();
+      } else {
+        ctx.beginPath();
+        ctx.fillStyle = `rgba(76, 201, 240, ${alpha * 0.6})`;
+        ctx.arc(p.x, p.y, size / 5, 0, Math.PI * 2);
+        ctx.fill();
+      }
     });
   }
 }
@@ -123,6 +163,8 @@ export default function IconCloud() {
     if (!ctx) return;
 
     const sphere = new FibonacciSphere(cloudTechnologies);
+    sphere.preloadImages();
+
     const renderer = new SphereRenderer(ctx, canvas, sphere);
     renderer.start();
 
