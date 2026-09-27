@@ -86,7 +86,7 @@ export const projects: Project[] = [
   new Project({
     title: "VeriReview AI",
     year: 2026,
-    role: "Developer",
+    role: "AI Engineer",
     // rank: "A",
     description:
       `VeriReview AI is an explainable fake review detection system for e-commerce that uses a fine-tuned BERT model to classify product
@@ -97,6 +97,27 @@ export const projects: Project[] = [
     tags: ["Python", "BERT", "FastAPI", "React"],
     links: [{ label: "Colab Notebook", url: "https://colab.research.google.com/drive/1OC0GBJWsuMFRr1AWwDuZZa-O3p3jn2Iu?usp=sharing" }],
     image: "/PictureQuest/VeriReview.png",
+  }),
+  new Project({
+    title: "EcoPulse",
+    year: 2026,
+    role: "Machine Learning Engineer",
+    // rank: "A",
+    description:
+      `EcoPulse is a Streamlit web app that clusters 176 countries by energy sustainability indicators using a K-Means model (k=2), built as a
+      Semester 4 Machine Learning project at BINUS University. Countries are grouped based on the 3-year average of 5 energy indicators —
+      separating nations with high modern energy access/consumption from those with limited access and consumption still dominated by
+      traditional biomass. The pipeline includes median imputation, IQR clipping, log1p transformation for skewed features, and RobustScaler,
+      with k selected via Silhouette Score across k=2–10. K-Means (Silhouette 0.4657) outperformed Hierarchical/Ward clustering, while DBSCAN
+      was used only for anomaly detection since over 90% of countries were flagged as noise. The app has 3 pages: predicting a new country's
+      cluster with a radar chart, exploring cluster profiles via an interactive t-SNE map, and an about-the-model page with methodology and
+      algorithm comparison.`,
+    tags: ["Python", "Streamlit", "K-Means", "Scikit-learn"],
+    links: [
+      { label: "Live App", url: "https://ecopulse-jqzo6qhu3eqnoacrt6iybf.streamlit.app/" },
+      { label: "GitHub", url: "https://github.com/Quaaltagh/EcoPulse" },
+    ],
+    image: "/PictureQuest/Ecopulse.png",
   }),
   new Project({
     title: "Lone Brawl",
