@@ -6,7 +6,6 @@ import { X, ExternalLink, ImageOff } from "lucide-react";
 import type { Project } from "@/data/projects";
 
 export default function ProjectModal({ project, onClose }: { project: Project | null; onClose: () => void }) {
-  // Tutup modal dengan tombol Escape
   useEffect(() => {
     if (!project) return;
     const onKey = (e: KeyboardEvent) => e.key === "Escape" && onClose();
@@ -47,7 +46,6 @@ export default function ProjectModal({ project, onClose }: { project: Project | 
 
             <div className="w-full h-56 md:h-72 bg-slate-800/60 flex items-center justify-center overflow-hidden rounded-t-2xl">
               {project.image ? (
-                // eslint-disable-next-line @next/next/no-img-element
                 <img src={project.image} alt={project.title} className="w-full h-full object-cover" />
               ) : (
                 <div className="flex flex-col items-center gap-2 text-slate-500">
@@ -60,7 +58,7 @@ export default function ProjectModal({ project, onClose }: { project: Project | 
             <div className="p-8">
               <div className="flex items-start justify-between gap-4 mb-2">
                 <h3 className="text-2xl font-bold text-white">{project.title}</h3>
-                {/* <span className={`px-2 py-1 ${project.rankColorClass} text-xs font-mono rounded whitespace-nowrap`}>{project.rankLabel}</span> */}
+                <span className={`px-2 py-1 ${project.rankColorClass} text-xs font-mono rounded whitespace-nowrap`}>{project.rankLabel}</span>
               </div>
               <p className="text-xs text-slate-500 font-mono mb-6">
                 {project.role} · {project.year}

@@ -1,15 +1,15 @@
 export class Skill {
   constructor(
     public readonly name: string,
-    public readonly value: number
+    public readonly matchTags: string[]
   ) {}
 }
 
 export const skills: Skill[] = [
-  new Skill("Frontend / React / Next.js", 90),
-  new Skill("Backend / Node.js / .NET / SQL", 85),
-  new Skill("Game Dev / Unity", 75),
-  new Skill("AI / Python", 90),
+  new Skill("Frontend / React / Next.js", ["React", "Next.js"]),
+  new Skill("Backend / Node.js / SQL", ["Node.js", "Express", "Supabase", "FastAPI"]),
+  new Skill("Game Dev / Unity", ["Unity", "C#"]),
+  new Skill("AI / Python", ["Python", "BERT", "Random Forest", "Scikit-learn", "K-Means"]),
 ];
 
 export class Technology {

@@ -94,7 +94,7 @@ export const projects: Project[] = [
       stack architecture achieving 90.81% accuracy and 91.34% F1-score. My Contribution, I was responsible for building and training the BERT
       based classification model, handling the full ML pipeline from data preprocessing and tokenization to fine-tuning, evaluation, and
       exporting the final model for team use.`,
-    tags: ["Python", "BERT", "FastAPI", "React"],
+    tags: ["Python", "BERT"],
     links: [{ label: "Colab Notebook", url: "https://colab.research.google.com/drive/1OC0GBJWsuMFRr1AWwDuZZa-O3p3jn2Iu?usp=sharing" }],
     image: "/PictureQuest/VeriReview.png",
   }),
@@ -142,8 +142,12 @@ export const projects: Project[] = [
     // rank: "B",
     description: `The Air Quality Prediction System is a microservices-based web application that predicts air pollution risk levels using a hybrid approach combining rule-based scoring and a Random Forest Classifier ML model, built with a Node.js/Express backend, Python/FastAPI ML microservice, and a Vite frontend — designed with fallback logic to remain functional even when the ML service is unavailable. 
     My Contribution: As the sole developer, I built the entire system end-to-end, including the backend API with validation and fallback logic, the ML microservice with a trained Random Forest Classifier (~82% accuracy), the frontend for input and visualization, and the full microservices integration between all components.`,
-    tags: ["Node.js", "FastAPI", "Random Forest", "Vite"],
-    links: [{ label: "GitHub", url: "https://github.com/Quaaltagh/AOL_AI_JAEEL" }],
+    tags: ["Node.js", "FastAPI", "Random Forest", "Vite", "React"],
+    links: [
+      { label: "GitHub", url: "https://github.com/Quaaltagh/AOL_AI_JAEEL" },
+      { label: "Demo Video", url: "https://drive.google.com/file/d/1yMkLFCTTv9EWbKId__4S0-aU9WBu9X93/view?usp=sharing"}
+
+    ],
     image: "/PictureQuest/JAAEL.png",
   }),
   new Project({

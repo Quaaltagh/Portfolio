@@ -1,12 +1,12 @@
 "use client";
 
 import React from "react";
-import { motion } from "framer-motion";
-import { Code2 } from "lucide-react";
+import { Code2, FolderGit2 } from "lucide-react";
 import Reveal3D from "../Reveal3D";
 import HoverTiltCard from "../HoverTiltCard";
 import IconCloud from "../IconCloud";
 import { skills } from "@/data/skills";
+import { projects } from "@/data/projects";
 
 export default function SkillTreeSection() {
   return (
@@ -18,26 +18,38 @@ export default function SkillTreeSection() {
           </div>
           <div className="order-1 md:order-2 space-y-6">
             <h3 className="text-4xl font-bold text-[#ffd60a] mb-8 flex items-center gap-4">
-              <Code2 /> Skill Tree
+              <Code2 /> Skills
             </h3>
             <HoverTiltCard className="border-[#ffd60a]/20">
               <div className="space-y-6">
-                {skills.map((skill, i) => (
-                  <div key={skill.name}>
-                    <div className="flex justify-between text-sm mb-2 font-mono">
-                      <span>{skill.name}</span>
+                {skills.map((skill) => {
+                  const relatedProjects = projects.filter((project) =>
+                    project.tags.some((tag) => skill.matchTags.includes(tag))
+                  );
+
+                  return (
+                    <div key={skill.name}>
+                      <div className="text-sm font-mono text-slate-200 mb-2">{skill.name}</div>
+                      {relatedProjects.length > 0 ? (
+                        <div className="flex flex-wrap gap-2">
+                          {relatedProjects.map((project) => (
+                            <a
+                              key={project.title}
+                              href="#quests"
+                              data-cursor="hover"
+                              className="inline-flex items-center gap-1.5 text-xs text-[#ffd60a] bg-[#ffd60a]/10 hover:bg-[#ffd60a]/20 border border-[#ffd60a]/30 px-3 py-1.5 rounded-full transition-colors"
+                            >
+                              <FolderGit2 size={12} />
+                              {project.title}
+                            </a>
+                          ))}
+                        </div>
+                      ) : (
+                        <span className="text-xs text-slate-600 font-mono">No linked project yet</span>
+                      )}
                     </div>
-                    <div className="h-2 w-full bg-slate-800 rounded-full overflow-hidden">
-                      <motion.div
-                        className="h-full bg-linear-to-r from-[#ffd60a]/50 to-[#ffd60a]"
-                        initial={{ width: 0 }}
-                        whileInView={{ width: `${skill.value}%` }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 1, delay: i * 0.2 }}
-                      />
-                    </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             </HoverTiltCard>
           </div>
