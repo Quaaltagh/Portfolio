@@ -25,7 +25,7 @@ export default function ProjectModal({ project, onClose }: { project: Project | 
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           onClick={onClose}
-          className="fixed inset-0 z-200 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm"
+          className="fixed inset-0 z-200 flex items-center justify-center p-3 sm:p-4 bg-black/70 backdrop-blur-sm"
         >
           <motion.div
             initial={{ opacity: 0, scale: 0.9, y: 30 }}
@@ -33,18 +33,18 @@ export default function ProjectModal({ project, onClose }: { project: Project | 
             exit={{ opacity: 0, scale: 0.9, y: 30 }}
             transition={{ type: "spring", stiffness: 260, damping: 24 }}
             onClick={(e) => e.stopPropagation()}
-            className="glass rounded-2xl max-w-2xl w-full max-h-[85vh] overflow-y-auto relative"
+            className="glass rounded-2xl max-w-2xl w-full max-h-[90vh] sm:max-h-[85vh] overflow-y-auto relative"
           >
             <button
               onClick={onClose}
               data-cursor="hover"
-              className="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-black/40 hover:bg-[#f72585]/30 flex items-center justify-center transition-colors"
+              className="absolute top-3 right-3 sm:top-4 sm:right-4 z-10 w-10 h-10 rounded-full bg-black/40 hover:bg-[#f72585]/30 flex items-center justify-center transition-colors"
               aria-label="Close"
             >
               <X size={20} />
             </button>
 
-            <div className="w-full h-56 md:h-72 bg-slate-800/60 flex items-center justify-center overflow-hidden rounded-t-2xl">
+            <div className="w-full h-44 sm:h-56 md:h-72 bg-slate-800/60 flex items-center justify-center overflow-hidden rounded-t-2xl">
               {project.image ? (
                 <img src={project.image} alt={project.title} className="w-full h-full object-cover" />
               ) : (
@@ -55,16 +55,16 @@ export default function ProjectModal({ project, onClose }: { project: Project | 
               )}
             </div>
 
-            <div className="p-8">
+            <div className="p-5 sm:p-8">
               <div className="flex items-start justify-between gap-4 mb-2">
-                <h3 className="text-2xl font-bold text-white">{project.title}</h3>
+                <h3 className="text-xl sm:text-2xl font-bold text-white">{project.title}</h3>
                 <span className={`px-2 py-1 ${project.rankColorClass} text-xs font-mono rounded whitespace-nowrap`}>{project.rankLabel}</span>
               </div>
-              <p className="text-xs text-slate-500 font-mono mb-6">
+              <p className="text-xs text-slate-500 font-mono mb-4 sm:mb-6">
                 {project.role} · {project.year}
               </p>
 
-              <p className="text-slate-300 leading-relaxed mb-6">{project.description}</p>
+              <p className="text-sm sm:text-base text-slate-300 leading-relaxed mb-6">{project.description}</p>
 
               <div className="flex gap-2 flex-wrap mb-6">
                 {project.tags.map((tag) => (

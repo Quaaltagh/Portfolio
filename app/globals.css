@@ -4,6 +4,16 @@
   --color-background: #060a14;
 }
 
+:root {
+  --meteor-distance: 300px;
+}
+
+@media (min-width: 640px) {
+  :root {
+    --meteor-distance: 500px;
+  }
+}
+
 /* Sembunyikan kursor standar hanya di perangkat yang mendukung mouse */
 @media (pointer: fine) {
   * {
@@ -11,18 +21,35 @@
   }
 }
 
+html {
+  -webkit-text-size-adjust: 100%;
+  overflow-x: hidden;
+}
+
 body {
   background-color: var(--color-background);
   color: #e2e8f0; /* slate-200 */
   overflow-x: hidden;
+  -webkit-tap-highlight-color: transparent;
 }
 
-/* Efek Glassmorphism Dasar */
+canvas {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Efek Glassmorphism Dasar*/
 @utility glass {
   background-color: rgba(255, 255, 255, 0.06);
-  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
   border: 1px solid rgba(255, 255, 255, 0.14);
   box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+
+  @media (min-width: 640px) {
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
+  }
 }
 
 /* Efek Hover untuk Glassmorphism */
@@ -36,14 +63,18 @@ body {
 
 /* Grid Lantai Sci-Fi */
 @utility bg-grid {
-  background-size: 40px 40px;
+  background-size: 28px 28px;
   background-image: linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
                     linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+
+  @media (min-width: 640px) {
+    background-size: 40px 40px;
+  }
 }
 
 /* Animasi untuk efek Meteor */
 @keyframes meteor {
   0% { transform: rotate(var(--angle)) translateX(0); opacity: 1; }
   70% { opacity: 1; }
-  100% { transform: rotate(var(--angle)) translateX(-500px); opacity: 0; }
+  100% { transform: rotate(var(--angle)) translateX(calc(var(--meteor-distance) * -1)); opacity: 0; }
 }

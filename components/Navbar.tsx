@@ -36,7 +36,7 @@ export default function Navbar() {
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ delay: 0.5, duration: 0.8 }}
-        className="fixed top-6 left-1/2 -translate-x-1/2 z-40 glass rounded-full px-8 py-3 flex items-center gap-8 text-xs tracking-widest text-[#4cc9f0] font-bold"
+        className="fixed top-4 sm:top-6 left-1/2 -translate-x-1/2 z-40 glass rounded-full px-4 py-2.5 sm:px-8 sm:py-3 flex items-center gap-3 sm:gap-8 text-[10px] sm:text-xs tracking-wider sm:tracking-widest text-[#4cc9f0] font-bold max-w-[calc(100vw-1rem)] whitespace-nowrap"
       >
         {NAV_LINKS.map((link) => (
           <a
@@ -55,7 +55,7 @@ export default function Navbar() {
           target="_blank"
           rel="noopener noreferrer"
           data-cursor="hover"
-          className="flex items-center gap-1.5 pl-4 border-l border-white/20 hover:text-white transition-colors"
+          className="flex items-center gap-1.5 pl-3 sm:pl-4 border-l border-white/20 hover:text-white transition-colors"
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src={GITHUB_ICON_URL} alt="" width={14} height={14} className="opacity-80" />

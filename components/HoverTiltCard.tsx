@@ -39,7 +39,7 @@ export default function HoverTiltCard({
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       style={{ rotateX: springX, rotateY: springY, transformStyle: "preserve-3d" }}
-      className={cn("glass glass-hover rounded-xl", noPadding ? "" : "p-8", className)}
+      className={cn("glass glass-hover rounded-xl", noPadding ? "" : "p-5 sm:p-8", className)}
     >
       <div style={{ transform: "translateZ(40px)" }}>{children}</div>
     </motion.div>

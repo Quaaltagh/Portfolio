@@ -6,10 +6,10 @@ export class Skill {
 }
 
 export const skills: Skill[] = [
+  new Skill("AI / Python", ["Python", "BERT", "Random Forest", "Scikit-learn", "K-Means"]),
   new Skill("Frontend / React / Next.js", ["React", "Next.js"]),
   new Skill("Backend / Node.js / SQL", ["Node.js", "Express", "Supabase", "FastAPI"]),
   new Skill("Game Dev / Unity", ["Unity", "C#"]),
-  new Skill("AI / Python", ["Python", "BERT", "Random Forest", "Scikit-learn", "K-Means"]),
 ];
 
 export class Technology {

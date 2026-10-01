@@ -17,7 +17,7 @@ export default function SkillTreeSection() {
             <IconCloud />
           </div>
           <div className="order-1 md:order-2 space-y-6">
-            <h3 className="text-4xl font-bold text-[#ffd60a] mb-8 flex items-center gap-4">
+            <h3 className="text-3xl sm:text-4xl font-bold text-[#ffd60a] mb-6 sm:mb-8 flex items-center gap-3 sm:gap-4">
               <Code2 /> Skills
             </h3>
             <HoverTiltCard className="border-[#ffd60a]/20">

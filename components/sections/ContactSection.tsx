@@ -29,35 +29,34 @@ export default function ContactSection() {
     <section className="min-h-[60vh] flex flex-col items-center justify-center px-4">
       <Reveal3D>
         <div className="text-center">
-          <h3 className="text-5xl font-bold text-white mb-8">CONTINUE?</h3>
-          
-          <div className="flex items-center justify-center gap-6 sm:gap-8">
-            
-            {/* Tombol LinkedIn */}
-            <a 
-              href="https://www.linkedin.com/in/johan-hendrawan/" 
-              target="_blank" 
+          <h3 className="text-4xl sm:text-5xl font-bold text-white mb-8">CONTINUE?</h3>
+
+          <div className="flex items-center justify-center gap-4 sm:gap-8">
+
+            <a
+              href="https://www.linkedin.com/in/johan-hendrawan/"
+              target="_blank"
               rel="noopener noreferrer"
-              data-cursor="hover" 
-              className="glass glass-hover p-6 rounded-lg flex flex-col items-center gap-4 group"
+              data-cursor="hover"
+              className="glass glass-hover p-4 sm:p-6 rounded-lg flex flex-col items-center gap-3 sm:gap-4 group"
             >
               <div className="w-16 h-20 border-2 border-white/20 flex items-center justify-center group-hover:border-[#4cc9f0] transition-colors relative overflow-hidden">
                 <div className="absolute inset-x-0 bottom-0 h-0 bg-[#4cc9f0]/20 group-hover:h-full transition-all duration-500" />
                 <LinkedinIcon className="text-white group-hover:text-[#4cc9f0] transition-colors relative z-10" />
               </div>
-              <span className="tracking-wider font-bold text-sm text-slate-300 group-hover:text-white transition-colors">LINKEDIN</span>
+              <span className="tracking-wider font-bold text-xs sm:text-sm text-slate-300 group-hover:text-white transition-colors">LINKEDIN</span>
             </a>
 
-            <a 
-              href={contact.mailtoLink} 
-              data-cursor="hover" 
-              className="glass glass-hover p-6 rounded-lg flex flex-col items-center gap-4 group"
+            <a
+              href={contact.mailtoLink}
+              data-cursor="hover"
+              className="glass glass-hover p-4 sm:p-6 rounded-lg flex flex-col items-center gap-3 sm:gap-4 group"
             >
               <div className="w-16 h-20 border-2 border-white/20 flex items-center justify-center group-hover:border-[#f72585] transition-colors relative overflow-hidden">
                 <div className="absolute inset-x-0 bottom-0 h-0 bg-[#f72585]/20 group-hover:h-full transition-all duration-500" />
                 <Mail className="text-white group-hover:text-[#f72585] transition-colors relative z-10" />
               </div>
-              <span className="tracking-wider font-bold text-sm text-slate-300 group-hover:text-white transition-colors">EMAIL</span>
+              <span className="tracking-wider font-bold text-xs sm:text-sm text-slate-300 group-hover:text-white transition-colors">EMAIL</span>
             </a>
 
           </div>
