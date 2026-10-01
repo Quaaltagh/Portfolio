@@ -16,19 +16,17 @@ const NAV_LINKS = [
 const GITHUB_ICON_URL = "https://cdn.simpleicons.org/github/FFFFFF";
 
 export default function Navbar() {
-  // href section tujuan yang sedang "dimuat" lewat transisi pintu
   const [target, setTarget] = useState<string | null>(null);
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
-    if (target) return; // cegah klik ganda saat animasi berjalan
+    if (target) return; 
     setTarget(href);
   };
 
   const jumpToTarget = () => {
     if (!target) return;
     const el = document.querySelector(target);
-    // "instant" supaya lompat terjadi di balik pintu, bukan scroll halus yang terlihat
     el?.scrollIntoView({ behavior: "instant" as ScrollBehavior, block: "start" });
   };
 
