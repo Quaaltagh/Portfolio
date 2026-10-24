@@ -16,11 +16,12 @@ export class Technology {
   constructor(
     public readonly name: string,
     public readonly slug: string,
-    public readonly color: string
+    public readonly color: string,
+    public readonly customUrl?: string
   ) {}
 
   get iconUrl(): string {
-    return `https://cdn.simpleicons.org/${this.slug}/${this.color}`;
+    return this.customUrl ?? `https://cdn.simpleicons.org/${this.slug}/${this.color}`;
   }
 }
 
@@ -37,6 +38,11 @@ export const cloudTechnologies: Technology[] = [
   new Technology("Framer", "framer", "0055FF"),
   new Technology("Git", "git", "F05032"),
   new Technology("Unity", "unity", "FFFFFF"),
-  new Technology("C#", "csharp", "9B4F96"),
+  new Technology(
+    "C#",
+    "csharp",
+    "9B4F96",
+    "https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/csharp/csharp-original.svg"
+  ),
   new Technology(".NET", "dotnet", "512BD4"),
 ];

@@ -5,7 +5,7 @@ import { Terminal, User } from "lucide-react";
 import Reveal3D from "../Reveal3D";
 import HoverTiltCard from "../HoverTiltCard";
 
-const PROFILE_IMAGE_SRC = "https://media.licdn.com/dms/image/v2/D5603AQEVDxh-hFCOiQ/profile-displayphoto-crop_800_800/B56ZeUNZTCHQAI-/0/1750538229344?e=1792022400&v=beta&t=MgW0nksI_jujspQdO6TS931gegaoo6ra5LNmZjECYLw";
+const PROFILE_IMAGE_SRC = "https://media.licdn.com/dms/image/v2/D5603AQEVDxh-hFCOiQ/profile-displayphoto-crop_800_800/B56ZeUNZTCHQAI-/0/1750538229344?e=1794441600&v=beta&t=51_rj-3DkTySWFD2XWFxH-qGormGxJNQCsHzuMvXGSw";
 
 export default function BioSection() {
   const [imgError, setImgError] = useState(false);
