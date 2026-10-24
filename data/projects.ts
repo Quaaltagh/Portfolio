@@ -218,6 +218,6 @@ export const projects: Project[] = [
       { label: "GitHub", url: "https://github.com/Quaaltagh/monivue" },
     ],
     image: "/PictureQuest/Monivue/1.png",
-    images: ["/PictureQuest/Monivue/1.png", "/PictureQuest/Monivue/2.png", "/PictureQuest/Monivue/3.png", "/PictureQuest/Monivue/4.png", "/PictureQuest/Monivue/5.png", "/PictureQuest/Monivue/6.png", "/PictureQuest/Monivue/7.png", "/PictureQuest/Monivue/8.png"],
+    images: ["/PictureQuest/Monivue/1.png", "/PictureQuest/Monivue/2.png", "/PictureQuest/Monivue/3.png", "/PictureQuest/Monivue/4.png", "/PictureQuest/Monivue/5.png", "/PictureQuest/Monivue/6.png", "/PictureQuest/Monivue/7.png"],
   }),
 ];
