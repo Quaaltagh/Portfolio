@@ -8,9 +8,7 @@ import QuestFan, { type FanCardItem } from "./QuestFan";
 import type { Project, ProjectCategory } from "@/data/projects";
 
 const ITEM_HEIGHT = 65;
-/** Jeda tiap pindah project (ms). */
 const AUTOPLAY_MS = 3500;
-/** Berapa lama setelah interaksi terakhir autoplay lanjut lagi (ms). */
 const RESUME_MS = 3000;
 
 export interface CategoryOption {
@@ -39,7 +37,6 @@ export default function QuestCarousel({
   onCategoryChange: (id: ProjectCategory) => void;
   projects: Project[];
   onOpen: (project: Project) => void;
-  /** true saat modal terbuka: autoplay & hitungan lanjut ditahan. */
   paused?: boolean;
 }) {
   const len = categories.length;
@@ -53,25 +50,19 @@ export default function QuestCarousel({
   const inView = useInView(rootRef, { amount: 0.35 });
   const reduceMotion = useReducedMotion();
 
-  // Project yang sedang disorot autoplay di dalam kategori aktif
   const [activeProject, setActiveProject] = useState(0);
-  // Hover mouse: autoplay berhenti selama mouse di dalam box
   const [hovering, setHovering] = useState(false);
-  // Sudah diklik/diketuk: autoplay berhenti sampai user diam selama RESUME_MS
   const [interacted, setInteracted] = useState(false);
-  // Naik tiap klik, supaya hitungan RESUME_MS diulang dari awal
   const [interactionTick, setInteractionTick] = useState(0);
 
   const autoplay = inView && !hovering && !interacted && !paused && !reduceMotion;
 
-  // Lanjutkan autoplay setelah user diam: tidak hover, modal tertutup, lalu tunggu RESUME_MS
   useEffect(() => {
     if (!interacted || hovering || paused) return;
     const timer = setTimeout(() => setInteracted(false), RESUME_MS);
     return () => clearTimeout(timer);
   }, [interacted, hovering, paused, interactionTick]);
 
-  // Autoplay: project satu per satu, setelah yang terakhir pindah ke kategori berikutnya
   useEffect(() => {
     if (!autoplay) return;
     const timer = setTimeout(() => {
@@ -91,7 +82,6 @@ export default function QuestCarousel({
     onCategoryChange(id);
   };
 
-  // Mobile: gulirkan barisan chip supaya chip aktif selalu terlihat (tanpa menggeser halaman)
   useEffect(() => {
     const row = chipRowRef.current;
     if (!row) return;
@@ -114,22 +104,19 @@ export default function QuestCarousel({
   return (
     <div
       ref={rootRef}
-      // Hover hanya dihitung untuk mouse. Klik/ketukan apa pun di dalam box menghentikan autoplay
-      // sementara, dan mengulang hitungan sebelum autoplay lanjut.
       onPointerEnter={(e) => e.pointerType === "mouse" && setHovering(true)}
       onPointerLeave={() => setHovering(false)}
       onClickCapture={() => {
         setInteracted(true);
         setInteractionTick((t) => t + 1);
       }}
-      className="relative overflow-hidden rounded-[1.5rem] sm:rounded-[2rem] lg:rounded-[3rem] border border-white/10 glass"
+      className="relative overflow-hidden rounded-3xl sm:rounded-4xl lg:rounded-[3rem] border border-white/10 glass"
     >
-      <div className="flex flex-col lg:flex-row lg:min-h-[640px]">
-        {/* KIRI (mobile): barisan chip horizontal */}
+      <div className="flex flex-col lg:flex-row lg:min-h-160">
         <div className="lg:hidden border-b border-white/10 bg-[#0b1020]/80">
           <div
             ref={chipRowRef}
-            className="relative flex gap-2 overflow-x-auto px-4 py-3 snap-x [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+            className="relative flex gap-2 overflow-x-auto px-4 py-3 snap-x scrollbar-none [&::-webkit-scrollbar]:hidden"
           >
             {categories.map((cat, index) => {
               const isActive = index === activeIndex;
@@ -163,12 +150,11 @@ export default function QuestCarousel({
           </div>
         </div>
 
-        {/* KIRI (desktop): pilihan kategori bergaya carousel vertikal */}
         <div className="hidden lg:flex w-[36%] relative z-30 flex-col items-start justify-center overflow-hidden pl-10 pr-4 bg-[#0b1020]/80">
           <div className="absolute inset-x-0 top-0 h-16 bg-linear-to-b from-[#0b1020] via-[#0b1020]/80 to-transparent z-40 pointer-events-none" />
           <div className="absolute inset-x-0 bottom-0 h-16 bg-linear-to-t from-[#0b1020] via-[#0b1020]/80 to-transparent z-40 pointer-events-none" />
 
-          <div className="relative w-full h-full min-h-[240px] flex items-center justify-start z-20">
+          <div className="relative w-full h-full min-h-60 flex items-center justify-start z-20">
             {categories.map((cat, index) => {
               const isActive = index === activeIndex;
               const wrappedDistance = wrap(-(len / 2), len / 2, index - activeIndex);

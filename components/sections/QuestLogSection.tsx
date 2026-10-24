@@ -28,7 +28,6 @@ export default function QuestLogSection() {
 
   const handleClose = useCallback(() => setSelected(null), []);
 
-  // Harus di-memoize supaya animasi GSAP di fan carousel tidak ke-reset setiap render
   const filtered = useMemo(() => projects.filter((p) => p.category === category), [category]);
 
   return (

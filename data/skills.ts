@@ -8,8 +8,9 @@ export class Skill {
 export const skills: Skill[] = [
   new Skill("AI / Python", ["Python", "BERT", "Random Forest", "Scikit-learn", "K-Means"]),
   new Skill("Frontend / React / Next.js", ["React", "Next.js"]),
-  new Skill("Backend / Node.js / SQL", ["Node.js", "Express", "Supabase", "FastAPI"]),
+  new Skill("Backend / Node.js / SQL", ["Node.js", "Express", "Supabase", "FastAPI", "SQLite", "Drift"]),
   new Skill("Game Dev / Unity", ["Unity", "C#"]),
+  new Skill("Mobile / Flutter", ["Flutter", "Dart", "Riverpod"]),
 ];
 
 export class Technology {
@@ -38,6 +39,8 @@ export const cloudTechnologies: Technology[] = [
   new Technology("Framer", "framer", "0055FF"),
   new Technology("Git", "git", "F05032"),
   new Technology("Unity", "unity", "FFFFFF"),
+  new Technology("Flutter", "flutter", "02569B"),
+  new Technology("Dart", "dart", "0175C2"),
   new Technology(
     "C#",
     "csharp",

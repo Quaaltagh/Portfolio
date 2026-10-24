@@ -13,7 +13,6 @@ export interface FanCardItem {
 
 interface QuestFanProps {
   cards: FanCardItem[];
-  /** Index kartu yang disorot otomatis (autoplay). null = tidak ada sorotan. */
   highlightIndex?: number | null;
 }
 
@@ -38,7 +37,6 @@ function getResponsiveMultiplier(width: number) {
   return 1.0;
 }
 
-/** Skala y-offset kalau viewport terlalu pendek untuk tinggi ideal layout. */
 function getHeightMultiplier(width: number) {
   let idealPx: number;
   if (width < 480) idealPx = 22 * 16;
@@ -52,10 +50,6 @@ function getHeightMultiplier(width: number) {
   return available / idealPx;
 }
 
-/**
- * Posisi tiap slot. Kalau kartu < 7, susunan dibuat simetris di tengah
- * dan sebarannya dipersempit supaya tidak terlalu melebar.
- */
 function getSlotConfig(totalCards: number, slot: number) {
   if (totalCards >= MAX_VISIBLE) return FAN_POSITIONS[slot];
   const center = (totalCards - 1) / 2;
@@ -81,7 +75,6 @@ function FanCardFace({ card }: { card: FanCardItem }) {
   return (
     <div className="relative w-full h-full overflow-hidden rounded-2xl border border-white/15 bg-slate-800/80 shadow-[0_10px_30px_rgba(0,0,0,0.5)]">
       {showImage ? (
-        // eslint-disable-next-line @next/next/no-img-element
         <img
           src={card.imgUrl}
           alt={card.title}
@@ -111,7 +104,6 @@ export default function QuestFan({ cards, highlightIndex = null }: QuestFanProps
   const directionRef = useRef<"left" | "right" | null>(null);
   const prevVisible = useRef<Set<number>>(new Set());
 
-  // Jembatan antara effect utama dan sorotan autoplay
   const layoutRef = useRef<((slot: number | null) => void) | null>(null);
   const visibleMapRef = useRef<Map<number, number>>(new Map());
   const hoveringRef = useRef(false);
@@ -149,7 +141,6 @@ export default function QuestFan({ cards, highlightIndex = null }: QuestFanProps
     [totalCards, needsPagination]
   );
 
-  /** Terapkan layout sesuai sorotan autoplay (atau layout netral kalau tidak ada). */
   const applyHighlight = useCallback(() => {
     if (hoveringRef.current || isAnimating.current) return;
     const idx = highlightRef.current;
@@ -157,7 +148,6 @@ export default function QuestFan({ cards, highlightIndex = null }: QuestFanProps
     layoutRef.current?.(slot);
   }, []);
 
-  // Sorotan berubah dari luar (autoplay)
   useEffect(() => {
     if (highlightIndex !== null && needsPagination && !visibleMapRef.current.has(highlightIndex)) {
       if (!isAnimating.current) {
@@ -186,10 +176,6 @@ export default function QuestFan({ cards, highlightIndex = null }: QuestFanProps
     const slotCount = needsPagination ? MAX_VISIBLE : totalCards;
     const config = (slot: number) => getSlotConfig(slotCount, slot);
 
-    /**
-     * Pengali lebar: mengikuti breakpoint, tapi dibatasi lebar container
-     * supaya kartu paling pinggir tidak keluar dari box.
-     */
     const calcMultiplier = () => {
       const responsive = getResponsiveMultiplier(window.innerWidth);
       const containerW = container.clientWidth;
@@ -200,7 +186,6 @@ export default function QuestFan({ cards, highlightIndex = null }: QuestFanProps
       for (let s = 0; s < slotCount; s++) maxX = Math.max(maxX, Math.abs(config(s).x));
       if (maxX === 0) return responsive;
 
-      // setengah container - setengah kartu (+ ruang untuk hover & rotasi)
       const availablePx = containerW / 2 - (cardW / 2) * 1.15 - 28;
       const allowedRem = Math.max(0, availablePx) / 16;
       return Math.max(0.1, Math.min(responsive, allowedRem / maxX));
@@ -216,7 +201,6 @@ export default function QuestFan({ cards, highlightIndex = null }: QuestFanProps
       if (++completedCount >= visibleCount) {
         isAnimating.current = false;
         if (isFirstMount) hasEntered.current = true;
-        // Animasi masuk/pindah selesai: terapkan sorotan autoplay
         applyHighlight();
       }
     };
@@ -256,7 +240,6 @@ export default function QuestFan({ cards, highlightIndex = null }: QuestFanProps
 
     prevVisible.current = new Set(visibleMap.keys());
 
-    // Interaksi hover
     const visibleEntries: { el: HTMLElement; slot: number }[] = [];
     cardElements.forEach((el, i) => {
       const slot = visibleMap.get(i);
@@ -316,7 +299,6 @@ export default function QuestFan({ cards, highlightIndex = null }: QuestFanProps
           ease: "elastic.out(1,.75)",
           overwrite: "auto",
         });
-        // Kartu yang disorot/di-hover naik ke paling depan
         gsap.set(el, { zIndex: slot === hoveredSlot ? 30 : base.zIndex });
       });
     };
@@ -346,7 +328,6 @@ export default function QuestFan({ cards, highlightIndex = null }: QuestFanProps
       leaveTimer = setTimeout(() => {
         activeSlot = null;
         hoveringRef.current = false;
-        // Kembali ke sorotan autoplay (atau netral kalau tidak ada)
         applyHighlight();
       }, 50);
     };
@@ -371,7 +352,7 @@ export default function QuestFan({ cards, highlightIndex = null }: QuestFanProps
 
   const chevron = (direction: "left" | "right") => (
     <svg
-      className="relative z-[2] w-4 h-4 md:w-5 md:h-5"
+      className="relative z-2 w-4 h-4 md:w-5 md:h-5"
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"

@@ -36,8 +36,7 @@ export default function QuestCard({ project, onOpen }: { project: Project; onOpe
                 {project.role} · {project.year}
               </p>
             </div>
-            {/* <span className={`px-2 py-1 ${project.rankColorClass} text-xs font-mono rounded whitespace-nowrap`}>{project.rankLabel}</span> */}
-          </div>
+       </div>
 
           <p className="text-slate-400 mb-6 text-sm leading-relaxed line-clamp-3">{project.description}</p>
 
