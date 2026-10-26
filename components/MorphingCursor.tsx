@@ -3,34 +3,43 @@
 import React, { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 
-
 class CursorEngine {
   mouse = { x: 0, y: 0 };
   ring = { x: 0, y: 0 };
   private reqId = 0;
-  private onFrame: () => void;
+  private running = false;
 
-  constructor(onFrame: () => void) {
-    this.onFrame = onFrame;
-  }
+  constructor(private onFrame: () => void) {}
 
-  start() {
-    const loop = () => {
-      this.ring.x += (this.mouse.x - this.ring.x) * 0.18;
-      this.ring.y += (this.mouse.y - this.ring.y) * 0.18;
-      this.onFrame();
-      this.reqId = requestAnimationFrame(loop);
-    };
-    this.reqId = requestAnimationFrame(loop);
+  private loop = () => {
+    const dx = this.mouse.x - this.ring.x;
+    const dy = this.mouse.y - this.ring.y;
+    this.ring.x += dx * 0.18;
+    this.ring.y += dy * 0.18;
+    this.onFrame();
+
+    if (Math.abs(dx) < 0.1 && Math.abs(dy) < 0.1) {
+      this.running = false;
+      return;
+    }
+    this.reqId = requestAnimationFrame(this.loop);
+  };
+
+  private wake() {
+    if (this.running) return;
+    this.running = true;
+    this.reqId = requestAnimationFrame(this.loop);
   }
 
   updateMouse(x: number, y: number) {
     this.mouse.x = x;
     this.mouse.y = y;
+    this.wake();
   }
 
   stop() {
     cancelAnimationFrame(this.reqId);
+    this.running = false;
   }
 }
 
@@ -45,8 +54,19 @@ export default function MorphingCursor() {
   const cursorRef = useRef<HTMLDivElement>(null);
   const ringRef = useRef<HTMLDivElement>(null);
   const [cursorState, setCursorState] = useState("default");
+  const [enabled, setEnabled] = useState(false);
 
   useEffect(() => {
+    const mq = window.matchMedia("(pointer: fine)");
+    setEnabled(mq.matches);
+    const onChange = (e: MediaQueryListEvent) => setEnabled(e.matches);
+    mq.addEventListener("change", onChange);
+    return () => mq.removeEventListener("change", onChange);
+  }, []);
+
+  useEffect(() => {
+    if (!enabled) return;
+
     const engine = new CursorEngine(() => {
       if (cursorRef.current) {
         cursorRef.current.style.transform = `translate3d(${engine.mouse.x}px, ${engine.mouse.y}px, 0)`;
@@ -56,24 +76,27 @@ export default function MorphingCursor() {
       }
     });
 
-    const onMouseMove = (e: MouseEvent) => {
-      engine.updateMouse(e.clientX, e.clientY);
-      const target = e.target as HTMLElement;
-      const cursorEl = target.closest("[data-cursor]");
-      setCursorState(cursorEl ? cursorEl.getAttribute("data-cursor") || "default" : "default");
+    const onMouseMove = (e: MouseEvent) => engine.updateMouse(e.clientX, e.clientY);
+
+    const onMouseOver = (e: MouseEvent) => {
+      const cursorEl = (e.target as HTMLElement).closest("[data-cursor]");
+      setCursorState(cursorEl?.getAttribute("data-cursor") || "default");
     };
 
-    window.addEventListener("mousemove", onMouseMove);
-    engine.start();
+    window.addEventListener("mousemove", onMouseMove, { passive: true });
+    window.addEventListener("mouseover", onMouseOver, { passive: true });
 
     return () => {
       window.removeEventListener("mousemove", onMouseMove);
+      window.removeEventListener("mouseover", onMouseOver);
       engine.stop();
     };
-  }, []);
+  }, [enabled]);
+
+  if (!enabled) return null;
 
   return (
-    <div className="fixed inset-0 pointer-events-none z-9999 hidden sm:block">
+    <div className="fixed inset-0 pointer-events-none z-9999">
       <div ref={cursorRef} className="absolute top-0 left-0 w-2 h-2 -ml-1 -mt-1 bg-[#4cc9f0] rounded-full shadow-[0_0_10px_#4cc9f0]" />
       <motion.div
         ref={ringRef}

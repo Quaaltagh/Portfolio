@@ -9,7 +9,7 @@ import type { Project, ProjectCategory } from "@/data/projects";
 
 const ITEM_HEIGHT = 65;
 const AUTOPLAY_MS = 3500;
-const RESUME_MS = 3000;
+const RESUME_MS = 500;
 
 export interface CategoryOption {
   id: ProjectCategory;
@@ -110,7 +110,7 @@ export default function QuestCarousel({
         setInteracted(true);
         setInteractionTick((t) => t + 1);
       }}
-      className="relative overflow-hidden rounded-3xl sm:rounded-4xl lg:rounded-[3rem] border border-white/10 glass"
+      className="relative overflow-hidden rounded-3xl sm:rounded-4xl lg:rounded-[3rem] border border-white/10 glass-lite"
     >
       <div className="flex flex-col lg:flex-row lg:min-h-160">
         <div className="lg:hidden border-b border-white/10 bg-[#0b1020]/80">

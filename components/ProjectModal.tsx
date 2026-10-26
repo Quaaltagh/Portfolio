@@ -58,7 +58,6 @@ function Lightbox({
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                // Klik area kosong (di luar gambar & tombol) menutup lightbox
                 onClick={(e) => e.target === e.currentTarget && onClose()}
                 className="fixed inset-0 z-250 flex items-center justify-center p-3 sm:p-8 outline-none"
               >
@@ -348,7 +347,6 @@ function ModalBody({ project }: { project: Project }) {
 export default function ProjectModal({ project, onClose }: { project: Project | null; onClose: () => void }) {
   const open = project !== null;
 
-  // Simpan project terakhir supaya isi modal tidak kosong saat animasi keluar berjalan
   const lastProject = useRef<Project | null>(null);
   if (project) lastProject.current = project;
   const shown = project ?? lastProject.current;
@@ -363,7 +361,7 @@ export default function ProjectModal({ project, onClose }: { project: Project | 
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                className="fixed inset-0 z-200 bg-black/70 backdrop-blur-sm"
+                className="fixed inset-0 z-200 bg-black"
               />
             </Dialog.Overlay>
 
@@ -375,7 +373,7 @@ export default function ProjectModal({ project, onClose }: { project: Project | 
                   exit={{ opacity: 0, scale: 0.92, y: 30 }}
                   transition={{ type: "spring", stiffness: 260, damping: 24 }}
                   className={cn(
-                    "pointer-events-auto glass rounded-2xl w-full max-w-lg max-h-[90vh] overflow-y-auto relative outline-none",
+                    "pointer-events-auto glass-lite rounded-2xl w-full max-w-lg max-h-[90vh] overflow-y-auto relative outline-none",
                     HIDE_SCROLLBAR
                   )}
                 >

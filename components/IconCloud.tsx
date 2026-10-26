@@ -59,6 +59,7 @@ class SphereRenderer {
   ) {}
 
   start() {
+    if (this.reqId) return;
     const loop = () => {
       this.tick();
       this.reqId = requestAnimationFrame(loop);
@@ -68,6 +69,7 @@ class SphereRenderer {
 
   stop() {
     cancelAnimationFrame(this.reqId);
+    this.reqId = 0;
   }
 
   onDragStart(x: number, y: number) {
@@ -166,17 +168,23 @@ export default function IconCloud() {
     sphere.preloadImages();
 
     const renderer = new SphereRenderer(ctx, canvas, sphere);
-    renderer.start();
+
+    const io = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) renderer.start();
+      else renderer.stop();
+    });
+    io.observe(canvas);
 
     const handleDown = (e: MouseEvent) => renderer.onDragStart(e.clientX, e.clientY);
     const handleMove = (e: MouseEvent) => renderer.onDragMove(e.clientX, e.clientY);
     const handleUp = () => renderer.onDragEnd();
 
     canvas.addEventListener("mousedown", handleDown);
-    window.addEventListener("mousemove", handleMove);
+    window.addEventListener("mousemove", handleMove, { passive: true });
     window.addEventListener("mouseup", handleUp);
 
     return () => {
+      io.disconnect();
       renderer.stop();
       canvas.removeEventListener("mousedown", handleDown);
       window.removeEventListener("mousemove", handleMove);

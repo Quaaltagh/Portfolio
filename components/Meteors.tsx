@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 interface MeteorData {
   top: string;
@@ -21,14 +21,25 @@ class MeteorFactory {
 }
 
 export default function Meteors({ number = 20 }: { number?: number }) {
+  const rootRef = useRef<HTMLDivElement>(null);
   const [meteors, setMeteors] = useState<MeteorData[]>([]);
+  const [running, setRunning] = useState(false);
 
   useEffect(() => {
-    setMeteors(MeteorFactory.generate(number));
+    const isSmall = window.matchMedia("(max-width: 639px)").matches;
+    setMeteors(MeteorFactory.generate(isSmall ? Math.ceil(number / 2) : number));
   }, [number]);
+  
+  useEffect(() => {
+    const el = rootRef.current;
+    if (!el) return;
+    const io = new IntersectionObserver(([entry]) => setRunning(entry.isIntersecting));
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
 
   return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+    <div ref={rootRef} className="absolute inset-0 overflow-hidden pointer-events-none">
       {meteors.map((m, idx) => (
         <span
           key={idx}
@@ -39,6 +50,7 @@ export default function Meteors({ number = 20 }: { number?: number }) {
               left: m.left,
               animation: `meteor ${m.animationDuration} linear infinite`,
               animationDelay: m.animationDelay,
+              animationPlayState: running ? "running" : "paused",
               "--angle": "215deg",
             } as React.CSSProperties
           }

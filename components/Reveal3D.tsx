@@ -15,7 +15,10 @@ export default function Reveal3D({ children, className }: { children: React.Reac
 
   return (
     <div ref={ref} className={cn("w-full", className)} style={{ perspective: 1200 }}>
-      <motion.div style={{ rotateX, y, z, scale, opacity, transformStyle: "preserve-3d" }} className="w-full h-full">
+      <motion.div
+        style={{ rotateX, y, z, scale, opacity, transformStyle: "preserve-3d", willChange: "transform, opacity" }}
+        className="w-full h-full"
+      >
         {children}
       </motion.div>
     </div>

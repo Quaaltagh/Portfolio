@@ -44,14 +44,15 @@ export default function DoorLoader({ onClosed, onDone, holdMs = 450 }: DoorLoade
 
   return (
     <div className="fixed inset-0 z-300 flex pointer-events-auto">
-      {/* Pintu kiri */}
+      {/* Pintu kiri — solid, tanpa backdrop-filter (dulu 95% opak, jadi blur tidak terlihat) */}
       <motion.div
         initial={{ x: "-100%" }}
         animate={{ x: closing ? "0%" : "-100%" }}
         transition={{ duration: DURATION, ease: EASE }}
-        className="w-1/2 h-full glass bg-[#060a14]/95 border-r-0 rounded-none relative overflow-hidden"
+        style={{ willChange: "transform" }}
+        className="w-1/2 h-full bg-[#060a14] relative overflow-hidden"
       >
-        <Meteors number={15} />
+        <Meteors number={8} />
         <div className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 opacity-50">
           <div className="w-1 h-32 bg-[#4cc9f0] shadow-[0_0_15px_#4cc9f0]" />
         </div>
@@ -63,9 +64,10 @@ export default function DoorLoader({ onClosed, onDone, holdMs = 450 }: DoorLoade
         animate={{ x: closing ? "0%" : "100%" }}
         transition={{ duration: DURATION, ease: EASE }}
         onAnimationComplete={handleRightComplete}
-        className="w-1/2 h-full glass bg-[#060a14]/95 border-l-0 rounded-none relative overflow-hidden"
+        style={{ willChange: "transform" }}
+        className="w-1/2 h-full bg-[#060a14] relative overflow-hidden"
       >
-        <Meteors number={15} />
+        <Meteors number={8} />
         <div className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/2 opacity-50">
           <div className="w-1 h-32 bg-[#4cc9f0] shadow-[0_0_15px_#4cc9f0]" />
         </div>

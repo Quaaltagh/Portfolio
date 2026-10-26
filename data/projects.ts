@@ -103,8 +103,8 @@ export const projects: Project[] = [
       { label: "Live App", url: "https://lekan-one.vercel.app/" },
       { label: "GitHub", url: "https://github.com/Quaaltagh/lekan-public" },
     ],
-    image: "/PictureQuest/Lekan/1.png",
-    images: ["/PictureQuest/Lekan/1.png", "/PictureQuest/Lekan/2.png", "/PictureQuest/Lekan/3.png", "/PictureQuest/Lekan/4.png", "/PictureQuest/Lekan/5.png"],
+    image: "/PictureQuest/Lekan/1.webp",
+    images: ["/PictureQuest/Lekan/1.webp", "/PictureQuest/Lekan/2.webp", "/PictureQuest/Lekan/3.webp", "/PictureQuest/Lekan/4.webp", "/PictureQuest/Lekan/5.webp"],
   }),
 
   new Project({
@@ -120,7 +120,7 @@ export const projects: Project[] = [
       exporting the final model for team use.`,
     tags: ["Python", "BERT"],
     links: [{ label: "Colab Notebook", url: "https://colab.research.google.com/drive/1OC0GBJWsuMFRr1AWwDuZZa-O3p3jn2Iu?usp=sharing" }],
-    image: "/PictureQuest/VeriReview/1.png",
+    image: "/PictureQuest/VeriReview/1.webp",
   }),
 
   new Project({
@@ -142,7 +142,7 @@ export const projects: Project[] = [
       { label: "Live App", url: "https://ecopulse-jqzo6qhu3eqnoacrt6iybf.streamlit.app/" },
       { label: "GitHub", url: "https://github.com/Quaaltagh/EcoPulse" },
     ],
-    image: "/PictureQuest/Ecopulse/1.png",
+    image: "/PictureQuest/Ecopulse/1.webp",
   }),
 
   new Project({
@@ -159,7 +159,7 @@ export const projects: Project[] = [
       { label: "Play / Rate", url: "https://itch.io/jam/log-in-2026/rate/4581456" },
       { label: "GitHub", url: "https://github.com/KrapuRED/Lone-Brawl" },
     ],
-    image: "/PictureQuest/LoneBrawl/1.png",
+    image: "/PictureQuest/LoneBrawl/1.webp",
   }),
 
   new Project({
@@ -174,8 +174,8 @@ export const projects: Project[] = [
       { label: "GitHub", url: "https://github.com/berubob/venture-creation-binus" },
       { label: "Live App", url: "https://venture-creation-project-binus.vercel.app/" },
     ],
-    image: "/PictureQuest/VNS/1.png",
-    images: ["/PictureQuest/VNS/1.png", "/PictureQuest/VNS/2.png"],
+    image: "/PictureQuest/VNS/1.webp",
+    images: ["/PictureQuest/VNS/1.webp", "/PictureQuest/VNS/2.webp"],
   }),
 
   new Project({
@@ -190,8 +190,8 @@ export const projects: Project[] = [
       { label: "GitHub", url: "https://github.com/Quaaltagh/AOL_AI_JAEEL" },
       { label: "Demo Video", url: "https://drive.google.com/file/d/1yMkLFCTTv9EWbKId__4S0-aU9WBu9X93/view?usp=sharing" },
     ],
-    image: "/PictureQuest/JAAEL/1.png",
-    images: ["/PictureQuest/JAAEL/1.png", "/PictureQuest/JAAEL/2.png", "/PictureQuest/JAAEL/3.png", "/PictureQuest/JAAEL/4.png", "/PictureQuest/JAAEL/5.png"],
+    image: "/PictureQuest/JAAEL/1.webp",
+    images: ["/PictureQuest/JAAEL/1.webp", "/PictureQuest/JAAEL/2.webp", "/PictureQuest/JAAEL/3.webp", "/PictureQuest/JAAEL/4.webp", "/PictureQuest/JAAEL/5.webp"],
   }),
 
   new Project({
@@ -203,7 +203,7 @@ export const projects: Project[] = [
       "Bullet Haven is a 2D top-down shooter survival game built in Unity where players must fend off endless waves of enemies using shooting mechanics, with increasing difficulty designed to test reflexes and strategic movement. My Contribution, as a solo developer under LOGIC (BINUS Game Development Organization), I independently designed and built the entire game, including player shooting mechanics, enemy AI and wave spawning system, and overall gameplay loop from scratch using Unity, with UI assets sourced from the Unity Asset Store",
     tags: ["Unity", "C#", "Game Dev"],
     links: [{ label: "GitHub", url: "https://github.com/Quaaltagh/2D-game" }],
-    image: "/PictureQuest/BulletHaven/1.png",
+    image: "/PictureQuest/BulletHaven/1.webp",
   }),
   
   new Project({
@@ -217,7 +217,7 @@ export const projects: Project[] = [
     links: [
       { label: "GitHub", url: "https://github.com/Quaaltagh/monivue" },
     ],
-    image: "/PictureQuest/Monivue/1.png",
-    images: ["/PictureQuest/Monivue/1.png", "/PictureQuest/Monivue/2.png", "/PictureQuest/Monivue/3.png", "/PictureQuest/Monivue/4.png", "/PictureQuest/Monivue/5.png", "/PictureQuest/Monivue/6.png", "/PictureQuest/Monivue/7.png"],
+    image: "/PictureQuest/Monivue/1.webp",
+    images: ["/PictureQuest/Monivue/1.webp", "/PictureQuest/Monivue/2.webp", "/PictureQuest/Monivue/3.webp", "/PictureQuest/Monivue/4.webp", "/PictureQuest/Monivue/5.webp", "/PictureQuest/Monivue/6.webp", "/PictureQuest/Monivue/7.webp"],
   }),
 ];
